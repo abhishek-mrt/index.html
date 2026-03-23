@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Google Sheets Setup — ONO Mentor</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --gold: #C9A84C; --dark: #0A0A0A; --dark-2: #111111; --dark-3: #1A1A1A; --text-primary: #F0EDE6; --text-muted: #8A8478; --text-dim: #5A5650; --border: rgba(201,168,76,0.18); --border-strong: rgba(201,168,76,0.38); --green: #2ECC71; }
+  body { background: var(--dark); color: var(--text-primary); font-family: 'Outfit', sans-serif; font-weight: 300; line-height: 1.7; padding: 3rem 0 5rem; }
+  .container { max-width: 780px; margin: 0 auto; padding: 0 2rem; }
+  h1 { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 500; margin-bottom: 0.5rem; }
+  .subtitle { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 3rem; }
+  .step-block { border: 0.5px solid var(--border); padding: 2rem; margin-bottom: 1.5rem; background: var(--dark-2); }
+  .step-num { font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
+  .step-title { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; margin-bottom: 0.75rem; }
+  .step-body { font-size: 0.875rem; color: var(--text-muted); line-height: 1.85; }
+  .step-body p { margin-bottom: 0.75rem; }
+  pre { background: var(--dark-3); border: 0.5px solid var(--border); padding: 1.25rem 1.5rem; font-family: 'Courier New', monospace; font-size: 0.8rem; color: #B5D5A0; line-height: 1.7; overflow-x: auto; margin: 1rem 0; white-space: pre-wrap; }
+  .highlight { color: var(--gold); }
+  .alert { background: rgba(201,168,76,0.08); border: 0.5px solid var(--border-strong); padding: 1rem 1.25rem; font-size: 0.82rem; color: var(--text-muted); margin: 1rem 0; }
+  .alert strong { color: var(--gold); }
+  .back-link { display: inline-block; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; margin-bottom: 2.5rem; transition: color 0.2s; }
+  .back-link:hover { color: var(--gold); }
+  .done-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(46,204,113,0.1); border: 0.5px solid rgba(46,204,113,0.3); color: var(--green); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.3rem 0.75rem; margin-bottom: 1rem; }
+  ol { padding-left: 1.25rem; margin: 0.75rem 0; }
+  ol li { margin-bottom: 0.4rem; font-size: 0.875rem; color: var(--text-muted); }
+</style>
+</head>
+<body>
+<div class="container">
+  <a href="ono-mentor.html" class="back-link">← Back to ONO Mentor</a>
+
+  <h1>Connect Form to Google Sheets</h1>
+  <p class="subtitle">A free, no-code setup using Google Apps Script. Takes about 10 minutes.</p>
+
+  <!-- STEP 1 -->
+  <div class="step-block">
+    <div class="step-num">Step 01</div>
+    <div class="step-title">Create your Google Sheet</div>
+    <div class="step-body">
+      <p>Go to <strong>sheets.google.com</strong> and create a new spreadsheet. Name it <em>"ONO Mentor — Assessment Leads"</em>.</p>
+      <p>In Row 1, add these exact column headers (one per cell, A to I):</p>
+      <pre>Timestamp  |  First Name  |  Last Name  |  Phone  |  Email  |  Exam  |  Class  |  Coaching  |  Challenge</pre>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step-block">
+    <div class="step-num">Step 02</div>
+    <div class="step-title">Open Apps Script</div>
+    <div class="step-body">
+      <p>In your Google Sheet, click <strong>Extensions → Apps Script</strong>. A new tab will open with the script editor.</p>
+      <p>Delete any existing code and paste the following script entirely:</p>
+      <pre><span class="highlight">function doPost(e) {</span>
+  const sheet = SpreadsheetApp
+    .getActiveSpreadsheet()
+    .getActiveSheet();
+
+  let data;
+  try {
+    data = JSON.parse(e.postData.contents);
+  } catch(err) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ status: 'error', message: 'Invalid JSON' }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+
+  sheet.appendRow([
+    data.timestamp   || new Date().toLocaleString(),
+    data.fname       || '',
+    data.lname       || '',
+    data.phone       || '',
+    data.email       || '',
+    data.exam        || '',
+    data.cls         || '',
+    data.coaching    || '',
+    data.challenge   || ''
+  ]);
+
+  return ContentService
+    .createTextOutput(JSON.stringify({ status: 'success' }))
+    .setMimeType(ContentService.MimeType.JSON);
+<span class="highlight">}</span></pre>
+      <p>Click the <strong>💾 Save</strong> icon (or Ctrl+S).</p>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step-block">
+    <div class="step-num">Step 03</div>
+    <div class="step-title">Deploy as a Web App</div>
+    <div class="step-body">
+      <p>Click the blue <strong>Deploy</strong> button (top right) → <strong>New deployment</strong>.</p>
+      <ol>
+        <li>Click the gear icon next to "Select type" → choose <strong>Web app</strong></li>
+        <li>Description: <em>ONO Mentor Form</em></li>
+        <li>Execute as: <strong>Me</strong></li>
+        <li>Who has access: <strong>Anyone</strong></li>
+        <li>Click <strong>Deploy</strong></li>
+        <li>Authorize the app when prompted (click "Allow")</li>
+      </ol>
+      <div class="alert"><strong>Important:</strong> After deploying, you'll see a "Web app URL" that looks like:<br /><code>https://script.google.com/macros/s/AKfycb.../exec</code><br />Copy this URL — you'll need it in the next step.</div>
+    </div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="step-block">
+    <div class="step-num">Step 04</div>
+    <div class="step-title">Paste the URL into ono-mentor.html</div>
+    <div class="step-body">
+      <p>Open <strong>ono-mentor.html</strong> in a text editor (VS Code, Notepad++, etc.).</p>
+      <p>Find this line near the bottom of the file (inside the <code>&lt;script&gt;</code> tag):</p>
+      <pre>const SHEET_URL = '<span class="highlight">YOUR_APPS_SCRIPT_URL_HERE</span>';</pre>
+      <p>Replace <code>YOUR_APPS_SCRIPT_URL_HERE</code> with your copied URL:</p>
+      <pre>const SHEET_URL = '<span class="highlight">https://script.google.com/macros/s/AKfycb.../exec</span>';</pre>
+      <p>Save the file. That's it — your form will now write every lead directly to Google Sheets.</p>
+    </div>
+  </div>
+
+  <!-- STEP 5 -->
+  <div class="step-block">
+    <div class="step-num">Step 05</div>
+    <div class="step-title">Test the connection</div>
+    <div class="step-body">
+      <p>Open <strong>ono-mentor.html</strong> in your browser, fill in the assessment form, and submit it. Then check your Google Sheet — a new row should appear within 2–3 seconds.</p>
+      <div class="alert"><strong>If rows aren't appearing:</strong> Go back to Apps Script → Deploy → Manage deployments → make sure "Who has access" is set to <strong>Anyone</strong>. Then re-deploy with a new version.</div>
+    </div>
+  </div>
+
+  <!-- DONE -->
+  <div class="step-block" style="border-color: rgba(46,204,113,0.3); background: rgba(46,204,113,0.04);">
+    <div class="done-badge">✓ Setup Complete</div>
+    <div class="step-title" style="font-family:'Cormorant Garamond',serif;">You're live.</div>
+    <div class="step-body">
+      <p>Every assessment booking from your website will now appear as a new row in your Google Sheet with full details: name, phone, email, exam, class, coaching institute, and timestamp.</p>
+      <p style="margin-top:0.75rem;">Tip: In Google Sheets, go to <strong>Tools → Notification rules</strong> to get an email alert every time a new lead submits the form.</p>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
