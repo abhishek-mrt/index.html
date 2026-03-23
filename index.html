@@ -4,777 +4,193 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>ONO Mentor — Premium JEE & NEET Mentorship</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet" />
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --gold: #C9A84C;
-    --gold-light: #E8C97A;
-    --gold-pale: #F5EDD6;
-    --dark: #0A0A0A;
-    --dark-2: #111111;
-    --dark-3: #1A1A1A;
-    --dark-4: #242424;
-    --dark-5: #2E2E2E;
-    --text-primary: #F0EDE6;
-    --text-muted: #8A8478;
-    --text-dim: #5A5650;
-    --border: rgba(201,168,76,0.18);
-    --border-strong: rgba(201,168,76,0.38);
+    --navy: #0F2044; --navy-mid: #1A3260; --navy-light: #274785;
+    --accent: #2563EB; --accent-light: #3B82F6; --accent-pale: #EFF6FF;
+    --white: #FFFFFF; --gray-50: #F8FAFC; --gray-100: #F1F5F9;
+    --gray-200: #E2E8F0; --gray-400: #94A3B8; --gray-600: #475569; --gray-800: #1E293B;
+    --text-primary: #0F172A; --text-muted: #475569; --text-dim: #94A3B8;
+    --border: #E2E8F0; --border-mid: #CBD5E1;
+    --shadow-sm: 0 1px 3px rgba(15,32,68,0.08); --shadow-md: 0 4px 16px rgba(15,32,68,0.10); --shadow-lg: 0 10px 40px rgba(15,32,68,0.13);
   }
-
   html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--dark);
-    color: var(--text-primary);
-    font-family: 'Outfit', sans-serif;
-    font-weight: 300;
-    line-height: 1.7;
-    overflow-x: hidden;
-  }
-
-  /* NOISE TEXTURE OVERLAY */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.4;
-  }
+  body { background: var(--white); color: var(--text-primary); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 400; line-height: 1.7; overflow-x: hidden; }
 
   /* NAV */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    padding: 1.25rem 4rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: rgba(10,10,10,0.85);
-    backdrop-filter: blur(20px);
-    border-bottom: 0.5px solid var(--border);
-  }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 4rem; height: 68px; display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.96); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); box-shadow: var(--shadow-sm); }
+  .logo { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--navy); text-decoration: none; }
+  .logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-cta { background: var(--navy); border: none; color: var(--white); padding: 0.6rem 1.4rem; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.82rem; font-weight: 600; border-radius: 6px; cursor: pointer; transition: all 0.2s; }
+  .nav-cta:hover { background: var(--navy-mid); box-shadow: var(--shadow-md); }
 
-  .logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.5rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    color: var(--gold);
-    text-decoration: none;
-  }
-  .logo span { color: var(--text-primary); }
-
-  .nav-links {
-    display: flex;
-    gap: 2.5rem;
-    list-style: none;
-  }
-  .nav-links a {
-    color: var(--text-muted);
-    text-decoration: none;
-    font-size: 0.82rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--gold); }
-
-  .nav-cta {
-    background: transparent;
-    border: 0.5px solid var(--gold);
-    color: var(--gold);
-    padding: 0.55rem 1.4rem;
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.8rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.25s;
-  }
-  .nav-cta:hover {
-    background: var(--gold);
-    color: var(--dark);
-  }
-
-  /* SECTION LAYOUT */
-  section { position: relative; z-index: 1; }
-
-  .container {
-    max-width: 1140px;
-    margin: 0 auto;
-    padding: 0 2rem;
-  }
+  section { position: relative; }
+  .container { max-width: 1140px; margin: 0 auto; padding: 0 2rem; }
 
   /* HERO */
-  #hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    padding: 7rem 0 5rem;
-    position: relative;
-    overflow: hidden;
-  }
+  #hero { min-height: 100vh; background: var(--navy); display: flex; align-items: center; padding: 8rem 0 5rem; position: relative; overflow: hidden; }
+  #hero::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; }
+  #hero::after { content: ''; position: absolute; top: -150px; right: -200px; width: 700px; height: 700px; border-radius: 50%; background: radial-gradient(circle, rgba(37,99,235,0.25) 0%, transparent 65%); pointer-events: none; }
 
-  #hero::before {
-    content: '';
-    position: absolute;
-    top: -200px; right: -300px;
-    width: 800px; height: 800px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%);
-    pointer-events: none;
-  }
+  .hero-inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 420px; gap: 5rem; align-items: center; }
 
-  #hero::after {
-    content: '';
-    position: absolute;
-    bottom: -100px; left: -200px;
-    width: 600px; height: 600px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(201,168,76,0.04) 0%, transparent 70%);
-    pointer-events: none;
-  }
+  .hero-tag { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(37,99,235,0.2); border: 1px solid rgba(37,99,235,0.4); color: #93C5FD; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.35rem 0.85rem; border-radius: 100px; margin-bottom: 1.75rem; opacity: 0; animation: fadeUp 0.7s ease forwards 0.1s; }
+  .hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #60A5FA; display: block; }
 
-  .hero-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-size: 0.72rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 1.75rem;
-    opacity: 0;
-    animation: fadeUp 0.8s ease forwards 0.2s;
-  }
-  .hero-eyebrow::before {
-    content: '';
-    display: block;
-    width: 28px; height: 0.5px;
-    background: var(--gold);
-  }
+  .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(2.6rem, 5vw, 4.4rem); font-weight: 600; line-height: 1.1; color: var(--white); margin-bottom: 1.5rem; letter-spacing: -0.02em; opacity: 0; animation: fadeUp 0.7s ease forwards 0.25s; }
+  .hero-title em { font-style: italic; color: #93C5FD; }
 
-  .hero-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(3rem, 6vw, 5.5rem);
-    font-weight: 500;
-    line-height: 1.06;
-    letter-spacing: -0.01em;
-    margin-bottom: 1.5rem;
-    opacity: 0;
-    animation: fadeUp 0.8s ease forwards 0.35s;
-  }
-  .hero-title em {
-    font-style: italic;
-    color: var(--gold);
-  }
+  .hero-sub { font-size: 1rem; color: #94A3B8; line-height: 1.8; max-width: 500px; margin-bottom: 2.5rem; opacity: 0; animation: fadeUp 0.7s ease forwards 0.4s; }
 
-  .hero-sub {
-    max-width: 520px;
-    font-size: 1rem;
-    color: var(--text-muted);
-    line-height: 1.8;
-    margin-bottom: 2.75rem;
-    opacity: 0;
-    animation: fadeUp 0.8s ease forwards 0.5s;
-  }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.7s ease forwards 0.55s; }
 
-  .hero-actions {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-    flex-wrap: wrap;
-    opacity: 0;
-    animation: fadeUp 0.8s ease forwards 0.65s;
-  }
+  .btn-primary { background: var(--accent); color: var(--white); border: none; padding: 0.85rem 2rem; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.875rem; font-weight: 600; border-radius: 6px; cursor: pointer; transition: all 0.2s; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; }
+  .btn-primary:hover { background: var(--accent-light); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(37,99,235,0.35); }
 
-  .btn-primary {
-    background: var(--gold);
-    color: var(--dark);
-    border: none;
-    padding: 0.9rem 2.25rem;
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.25s;
-    text-decoration: none;
-    display: inline-block;
-  }
-  .btn-primary:hover {
-    background: var(--gold-light);
-    transform: translateY(-1px);
-  }
+  .btn-ghost { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.25); padding: 0.85rem 2rem; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.875rem; font-weight: 500; border-radius: 6px; cursor: pointer; transition: all 0.2s; text-decoration: none; display: inline-block; }
+  .btn-ghost:hover { border-color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.06); }
 
-  .btn-ghost {
-    background: transparent;
-    color: var(--text-primary);
-    border: 0.5px solid var(--border-strong);
-    padding: 0.9rem 2.25rem;
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 400;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.25s;
-    text-decoration: none;
-    display: inline-block;
-  }
-  .btn-ghost:hover {
-    border-color: var(--gold);
-    color: var(--gold);
-  }
+  .hero-stats-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 2.25rem; backdrop-filter: blur(8px); opacity: 0; animation: fadeUp 0.7s ease forwards 0.7s; }
+  .hero-stats-title { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: #64748B; margin-bottom: 1.5rem; }
+  .hero-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  .hstat { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 1.1rem; }
+  .hstat-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--white); line-height: 1; margin-bottom: 0.2rem; }
+  .hstat-label { font-size: 0.72rem; color: #64748B; font-weight: 500; }
+  .hero-badge { margin-top: 1.25rem; background: rgba(37,99,235,0.15); border: 1px solid rgba(37,99,235,0.3); border-radius: 8px; padding: 1rem 1.1rem; display: flex; align-items: center; gap: 0.75rem; }
+  .hero-badge-icon { width: 36px; height: 36px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+  .hero-badge-text { font-size: 0.8rem; color: #93C5FD; font-weight: 500; line-height: 1.4; }
 
-  .hero-stats {
-    display: flex;
-    gap: 3rem;
-    margin-top: 4rem;
-    padding-top: 2.5rem;
-    border-top: 0.5px solid var(--border);
-    opacity: 0;
-    animation: fadeUp 0.8s ease forwards 0.8s;
-  }
-  .stat-item { }
-  .stat-number {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.25rem;
-    font-weight: 600;
-    color: var(--gold);
-    line-height: 1;
-    margin-bottom: 0.25rem;
-  }
-  .stat-label {
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-  }
-
-  /* DECORATIVE VERTICAL TEXT */
-  .hero-vertical {
-    position: absolute;
-    right: 4rem;
-    top: 50%;
-    transform: translateY(-50%) rotate(90deg);
-    transform-origin: center;
-    font-size: 0.65rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--text-dim);
-    white-space: nowrap;
-    opacity: 0;
-    animation: fadeIn 1.2s ease forwards 1s;
-  }
+  /* TRUST BAR */
+  #trust { background: var(--gray-50); border-bottom: 1px solid var(--border); padding: 1.25rem 0; }
+  .trust-inner { display: flex; align-items: center; justify-content: center; gap: 3rem; flex-wrap: wrap; }
+  .trust-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--text-muted); font-weight: 500; }
+  .trust-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
 
   /* SECTION HEADER */
-  .section-header {
-    text-align: center;
-    margin-bottom: 4rem;
-  }
-  .section-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-size: 0.7rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 1rem;
-  }
-  .section-eyebrow::before,
-  .section-eyebrow::after {
-    content: '';
-    display: block;
-    width: 20px; height: 0.5px;
-    background: var(--gold);
-  }
-  .section-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2rem, 3.5vw, 3rem);
-    font-weight: 500;
-    line-height: 1.15;
-    letter-spacing: -0.01em;
-  }
-  .section-title em { font-style: italic; color: var(--gold); }
+  .section-header { text-align: center; margin-bottom: 3.5rem; }
+  .section-eyebrow { display: inline-block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 600; color: var(--navy); line-height: 1.2; letter-spacing: -0.02em; }
+  .section-title em { font-style: italic; color: var(--accent); }
+  .section-sub { font-size: 0.95rem; color: var(--text-muted); margin-top: 0.75rem; max-width: 540px; margin-left: auto; margin-right: auto; }
 
   /* HOW IT WORKS */
-  #how {
-    padding: 7rem 0;
-    background: var(--dark-2);
-    border-top: 0.5px solid var(--border);
-    border-bottom: 0.5px solid var(--border);
-  }
-
-  .steps-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0;
-    border: 0.5px solid var(--border);
-  }
-
-  .step {
-    padding: 2.75rem 2.25rem;
-    border-right: 0.5px solid var(--border);
-    transition: background 0.3s;
-  }
-  .step:last-child { border-right: none; }
-  .step:hover { background: rgba(201,168,76,0.04); }
-
-  .step-number {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 3.5rem;
-    font-weight: 400;
-    color: rgba(201,168,76,0.18);
-    line-height: 1;
-    margin-bottom: 1.25rem;
-  }
-  .step-title {
-    font-size: 1rem;
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    margin-bottom: 0.75rem;
-    color: var(--text-primary);
-  }
-  .step-desc {
-    font-size: 0.875rem;
-    color: var(--text-muted);
-    line-height: 1.75;
-  }
+  #how { padding: 6rem 0; background: var(--white); }
+  .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .step { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 2.25rem; transition: all 0.25s; position: relative; }
+  .step:hover { border-color: var(--accent-light); box-shadow: var(--shadow-md); transform: translateY(-3px); }
+  .step:not(:last-child)::after { content: '→'; position: absolute; right: -1.1rem; top: 2.5rem; color: var(--accent); font-size: 1rem; z-index: 2; }
+  .step-num-badge { width: 40px; height: 40px; background: var(--accent-pale); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 0.82rem; font-weight: 700; color: var(--accent); margin-bottom: 1.25rem; }
+  .step-title { font-size: 1rem; font-weight: 600; color: var(--navy); margin-bottom: 0.65rem; }
+  .step-desc { font-size: 0.875rem; color: var(--text-muted); line-height: 1.75; }
 
   /* MENTORS */
-  #mentors { padding: 7rem 0; }
+  #mentors { padding: 6rem 0; background: var(--gray-50); }
+  .mentors-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .mentor-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; transition: all 0.25s; }
+  .mentor-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); border-color: var(--border-mid); }
+  .mentor-avatar { width: 56px; height: 56px; border-radius: 50%; background: var(--navy); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--white); margin-bottom: 1.1rem; }
+  .mentor-rank { display: inline-block; background: var(--accent-pale); color: var(--accent); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.25rem 0.6rem; border-radius: 4px; margin-bottom: 0.6rem; }
+  .mentor-name { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 600; color: var(--navy); margin-bottom: 0.15rem; }
+  .mentor-tag { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.85rem; font-weight: 500; }
+  .mentor-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 1.1rem; }
+  .mentor-badges { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.1rem; }
+  .badge { font-size: 0.68rem; font-weight: 600; background: var(--gray-100); color: var(--gray-600); padding: 0.2rem 0.6rem; border-radius: 4px; }
+  .mentor-profile-link { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.8rem; font-weight: 600; color: var(--accent); text-decoration: none; transition: gap 0.2s; }
+  .mentor-profile-link:hover { gap: 0.5rem; }
 
-  .mentors-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5px;
-    background: var(--border);
-  }
+  /* TESTIMONIALS */
+  #testimonials { padding: 6rem 0; background: var(--navy); }
+  #testimonials .section-title { color: var(--white); }
+  #testimonials .section-eyebrow { color: #93C5FD; }
+  #testimonials .section-sub { color: #64748B; }
+  .testimonials-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
+  .testimonial-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 2.25rem; transition: background 0.2s; }
+  .testimonial-card:hover { background: rgba(255,255,255,0.08); }
+  .result-badge { display: inline-block; background: rgba(37,99,235,0.2); border: 1px solid rgba(37,99,235,0.4); color: #93C5FD; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.25rem 0.65rem; border-radius: 4px; margin-bottom: 1rem; }
+  .testimonial-quote { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-style: italic; line-height: 1.65; color: #E2E8F0; margin-bottom: 1.5rem; }
+  .testimonial-quote::before { content: '\201C'; color: #3B82F6; font-size: 1.6rem; line-height: 0; vertical-align: -0.3em; margin-right: 0.1em; }
+  .testimonial-author { display: flex; align-items: center; gap: 0.75rem; }
+  .author-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--navy-mid); border: 1px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 700; color: #93C5FD; flex-shrink: 0; }
+  .author-name { font-size: 0.875rem; font-weight: 600; color: var(--white); }
+  .author-detail { font-size: 0.72rem; color: #64748B; }
+  .testimonial-wide { background: rgba(37,99,235,0.1); border: 1px solid rgba(37,99,235,0.25); border-radius: 12px; padding: 2.25rem; }
 
-  .mentor-card {
-    background: var(--dark);
-    padding: 2.25rem;
-    transition: background 0.3s;
-    cursor: pointer;
-  }
-  .mentor-card:hover { background: var(--dark-3); }
-
-  .mentor-avatar {
-    width: 58px; height: 58px;
-    border-radius: 50%;
-    border: 1.5px solid var(--border-strong);
-    margin-bottom: 1.25rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: var(--gold);
-    background: rgba(201,168,76,0.08);
-  }
-  .mentor-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.3rem;
-    font-weight: 600;
-    margin-bottom: 0.2rem;
-  }
-  .mentor-tag {
-    font-size: 0.72rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 1rem;
-  }
-  .mentor-desc {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    line-height: 1.75;
-    margin-bottom: 1.25rem;
-  }
-  .mentor-badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-  }
-  .badge {
-    font-size: 0.68rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    border: 0.5px solid var(--border-strong);
-    padding: 0.25rem 0.65rem;
-    color: var(--text-muted);
-  }
-
-  .mentor-profile-link {
-    display: inline-block;
-    margin-top: 1.25rem;
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--gold);
-    text-decoration: none;
-    border-bottom: 0.5px solid var(--border);
-    padding-bottom: 0.1rem;
-    transition: border-color 0.2s;
-  }
-  .mentor-profile-link:hover { border-color: var(--gold); }
-  #testimonials {
-    padding: 7rem 0;
-    background: var(--dark-2);
-    border-top: 0.5px solid var(--border);
-    border-bottom: 0.5px solid var(--border);
-  }
-
-  .testimonials-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5px;
-    background: var(--border);
-    margin-bottom: 1.5px;
-  }
-  .testimonials-grid + .testimonial-card {
-    background: var(--dark-2);
-    border: 0.5px solid var(--border);
-    margin-top: 0;
-  }
-
-  .testimonial-card {
-    background: var(--dark-2);
-    padding: 2.5rem;
-  }
-
-  .testimonial-quote {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.4rem;
-    font-weight: 400;
-    font-style: italic;
-    line-height: 1.55;
-    margin-bottom: 1.5rem;
-    color: var(--text-primary);
-  }
-  .testimonial-quote::before { content: '\201C'; color: var(--gold); font-size: 2rem; line-height: 0; vertical-align: -0.4em; margin-right: 0.15em; }
-
-  .testimonial-author {
-    display: flex;
-    align-items: center;
-    gap: 0.85rem;
-  }
-  .author-avatar {
-    width: 38px; height: 38px;
-    border-radius: 50%;
-    background: rgba(201,168,76,0.1);
-    border: 0.5px solid var(--border-strong);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.8rem;
-    font-weight: 500;
-    color: var(--gold);
-    flex-shrink: 0;
-  }
-  .author-name {
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--text-primary);
-  }
-  .author-detail {
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    letter-spacing: 0.05em;
-  }
-
-  .result-badge {
-    display: inline-block;
-    background: rgba(201,168,76,0.1);
-    border: 0.5px solid var(--border-strong);
-    color: var(--gold);
-    font-size: 0.7rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 0.25rem 0.65rem;
-    margin-bottom: 1rem;
-  }
-
-  /* ASSESSMENT / BOOKING */
-  #assessment {
-    padding: 7rem 0;
-  }
-
-  .assessment-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-    align-items: start;
-  }
-
-  .assessment-left h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2rem, 3.5vw, 3rem);
-    font-weight: 500;
-    line-height: 1.15;
-    margin-bottom: 1.25rem;
-  }
-  .assessment-left h2 em { font-style: italic; color: var(--gold); }
-
-  .assessment-left p {
-    color: var(--text-muted);
-    font-size: 0.9rem;
-    line-height: 1.85;
-    margin-bottom: 2rem;
-  }
-
-  .feature-list { list-style: none; }
-  .feature-list li {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-    padding: 0.7rem 0;
-    border-bottom: 0.5px solid var(--border);
-    font-size: 0.875rem;
-    color: var(--text-muted);
-  }
-  .feature-list li:first-child { border-top: 0.5px solid var(--border); }
-  .feature-list li::before {
-    content: '';
-    display: block;
-    width: 5px; height: 5px;
-    border-radius: 50%;
-    background: var(--gold);
-    margin-top: 0.55em;
-    flex-shrink: 0;
-  }
+  /* ASSESSMENT */
+  #assessment { padding: 6rem 0; background: var(--white); }
+  .assessment-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+  .assessment-left h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 600; color: var(--navy); line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 1rem; }
+  .assessment-left h2 em { font-style: italic; color: var(--accent); }
+  .assessment-left > p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.85; margin-bottom: 2rem; }
+  .feature-list { list-style: none; margin-bottom: 2rem; }
+  .feature-list li { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.75rem 0; border-bottom: 1px solid var(--border); font-size: 0.875rem; color: var(--text-muted); }
+  .feature-list li:first-child { border-top: 1px solid var(--border); }
+  .feature-list li::before { content: '✓'; color: var(--accent); font-weight: 700; font-size: 0.9rem; flex-shrink: 0; margin-top: 0.05em; }
+  .slots-notice { display: flex; align-items: center; gap: 0.6rem; font-size: 0.8rem; color: var(--text-muted); padding: 0.75rem 1rem; background: var(--gray-50); border: 1px solid var(--border); border-radius: 8px; }
+  .slots-dot { width: 8px; height: 8px; border-radius: 50%; background: #22C55E; flex-shrink: 0; }
 
   /* FORM */
-  .form-card {
-    background: var(--dark-2);
-    border: 0.5px solid var(--border);
-    padding: 2.75rem;
-  }
+  .form-card { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 2.5rem; box-shadow: var(--shadow-lg); }
+  .form-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 600; color: var(--navy); margin-bottom: 0.35rem; }
+  .form-sub { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 1.75rem; }
+  .form-group { margin-bottom: 1rem; }
+  .form-group label { display: block; font-size: 0.78rem; font-weight: 600; color: var(--gray-800); margin-bottom: 0.4rem; }
+  .form-group input, .form-group select, .form-group textarea { width: 100%; background: var(--white); border: 1px solid var(--border-mid); color: var(--text-primary); padding: 0.7rem 0.9rem; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.875rem; border-radius: 8px; outline: none; transition: border-color 0.2s, box-shadow 0.2s; -webkit-appearance: none; }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
+  .form-group textarea { resize: vertical; min-height: 85px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
+  .form-submit { width: 100%; background: var(--navy); color: var(--white); border: none; padding: 0.95rem; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.875rem; font-weight: 600; border-radius: 8px; cursor: pointer; transition: all 0.2s; margin-top: 0.5rem; }
+  .form-submit:hover { background: var(--navy-mid); box-shadow: var(--shadow-md); }
+  .form-note { font-size: 0.72rem; color: var(--text-dim); text-align: center; margin-top: 0.75rem; }
 
-  .form-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-  }
-  .form-sub {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    margin-bottom: 2rem;
-    letter-spacing: 0.05em;
-  }
-
-  .form-group { margin-bottom: 1.1rem; }
-  .form-group label {
-    display: block;
-    font-size: 0.72rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 0.45rem;
-  }
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    width: 100%;
-    background: var(--dark-3);
-    border: 0.5px solid var(--border);
-    color: var(--text-primary);
-    padding: 0.75rem 1rem;
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.875rem;
-    font-weight: 300;
-    outline: none;
-    transition: border-color 0.2s;
-    -webkit-appearance: none;
-  }
-  .form-group input:focus,
-  .form-group select:focus,
-  .form-group textarea:focus {
-    border-color: var(--gold);
-  }
-  .form-group select option { background: var(--dark-3); }
-  .form-group textarea { resize: vertical; min-height: 90px; }
-
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-
-  .form-submit {
-    width: 100%;
-    background: var(--gold);
-    color: var(--dark);
-    border: none;
-    padding: 1rem;
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: background 0.25s;
-    margin-top: 0.5rem;
-  }
-  .form-submit:hover { background: var(--gold-light); }
-
-  .form-note {
-    font-size: 0.72rem;
-    color: var(--text-dim);
-    text-align: center;
-    margin-top: 0.85rem;
-    letter-spacing: 0.04em;
-  }
+  /* SUCCESS */
+  .form-success { display: none; text-align: center; padding: 3rem 1rem; }
+  .form-success.active { display: block; }
+  .success-icon { width: 56px; height: 56px; background: #DCFCE7; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin: 0 auto 1.25rem; }
+  .success-title { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 600; color: var(--navy); margin-bottom: 0.5rem; }
+  .success-sub { font-size: 0.875rem; color: var(--text-muted); }
 
   /* FOOTER */
-  footer {
-    padding: 3.5rem 0;
-    border-top: 0.5px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
-    z-index: 1;
-  }
-
-  .footer-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--gold);
-  }
-  .footer-logo span { color: var(--text-muted); }
-
-  .footer-copy {
-    font-size: 0.75rem;
-    color: var(--text-dim);
-    letter-spacing: 0.08em;
-  }
-
-  .footer-links {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-  }
-  .footer-links a {
-    font-size: 0.75rem;
-    color: var(--text-dim);
-    text-decoration: none;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    transition: color 0.2s;
-  }
-  .footer-links a:hover { color: var(--gold); }
-
-  /* SUCCESS STATE */
-  .form-success {
-    display: none;
-    text-align: center;
-    padding: 3rem 1rem;
-  }
-  .form-success.active { display: block; }
-  .success-icon {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    color: var(--gold);
-  }
-  .success-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.75rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-  }
-  .success-sub {
-    font-size: 0.875rem;
-    color: var(--text-muted);
-  }
+  footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.08); padding: 2.5rem 0; }
+  .footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--white); }
+  .footer-logo span { color: #60A5FA; }
+  .footer-copy { font-size: 0.75rem; color: #475569; }
+  .footer-links { display: flex; gap: 1.75rem; list-style: none; }
+  .footer-links a { font-size: 0.78rem; color: #475569; text-decoration: none; font-weight: 500; transition: color 0.2s; }
+  .footer-links a:hover { color: #94A3B8; }
 
   /* ANIMATIONS */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-  }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
 
-  .reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* GOLD DIVIDER */
-  .gold-divider {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin: 1.5rem 0;
-  }
-  .gold-divider::before, .gold-divider::after {
-    content: '';
-    flex: 1;
-    height: 0.5px;
-    background: var(--border);
-  }
-  .gold-divider span {
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--text-dim);
-  }
+  /* WHATSAPP */
+  .whatsapp-float { position: fixed; bottom: 2rem; right: 2rem; z-index: 200; background: #25D366; width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37,211,102,0.4); transition: transform 0.2s; text-decoration: none; }
+  .whatsapp-float:hover { transform: scale(1.08); }
+  .whatsapp-float svg { width: 27px; height: 27px; fill: white; }
 
   /* MOBILE */
   @media (max-width: 900px) {
-    nav { padding: 1rem 1.5rem; }
-    .nav-links { display: none; }
-    .steps-grid, .mentors-grid, .testimonials-grid { grid-template-columns: 1fr; }
-    .step { border-right: none; border-bottom: 0.5px solid var(--border); }
+    nav { padding: 0 1.5rem; } .nav-links { display: none; }
+    .hero-inner { grid-template-columns: 1fr; gap: 2.5rem; } .hero-stats-card { display: none; }
+    .steps-grid, .mentors-grid { grid-template-columns: 1fr; }
+    .step:not(:last-child)::after { display: none; }
+    .testimonials-grid { grid-template-columns: 1fr; }
     .assessment-wrapper { grid-template-columns: 1fr; gap: 2.5rem; }
     .form-row { grid-template-columns: 1fr; }
-    .hero-stats { gap: 2rem; flex-wrap: wrap; }
-    .hero-vertical { display: none; }
-    footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+    .footer-inner { flex-direction: column; text-align: center; }
   }
-
-  /* WHATSAPP FLOAT */
-  .whatsapp-float {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    z-index: 200;
-    background: #25D366;
-    width: 52px; height: 52px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 4px 20px rgba(37,211,102,0.35);
-    transition: transform 0.2s;
-    text-decoration: none;
-  }
-  .whatsapp-float:hover { transform: scale(1.08); }
-  .whatsapp-float svg { width: 28px; height: 28px; fill: white; }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
-  <a href="#" class="logo">ONO<span> Mentor</span></a>
+  <a href="#" class="logo">ONO<span>Mentor</span></a>
   <ul class="nav-links">
     <li><a href="#how">How It Works</a></li>
     <li><a href="#mentors">Mentors</a></li>
@@ -784,170 +200,146 @@
   <button class="nav-cta" onclick="document.getElementById('assessment').scrollIntoView({behavior:'smooth'})">Free Assessment</button>
 </nav>
 
-<!-- HERO -->
 <section id="hero">
   <div class="container">
-    <div class="hero-eyebrow">Premium JEE &amp; NEET Mentorship</div>
-    <h1 class="hero-title">
-      One mentor.<br />
-      <em>Infinite clarity.</em><br />
-      Your rank awaits.
-    </h1>
-    <p class="hero-sub">
-      ONO Mentor pairs JEE &amp; NEET aspirants with elite IIT &amp; AIIMS alumni for one-to-one mentorship — cutting through the noise of mass coaching.
-    </p>
-    <div class="hero-actions">
-      <a href="#assessment" class="btn-primary">Book Free Assessment</a>
-      <a href="#mentors" class="btn-ghost">Meet Our Mentors</a>
-    </div>
-    <div class="hero-stats">
-      <div class="stat-item">
-        <div class="stat-number">94%</div>
-        <div class="stat-label">Improvement Rate</div>
+    <div class="hero-inner">
+      <div>
+        <div class="hero-tag">Premium JEE &amp; NEET Mentorship</div>
+        <h1 class="hero-title">One mentor.<br /><em>Infinite clarity.</em><br />Your rank awaits.</h1>
+        <p class="hero-sub">ONO Mentor pairs JEE &amp; NEET aspirants with elite IIT &amp; AIIMS alumni for one-to-one personalised mentorship — beyond what mass coaching can offer.</p>
+        <div class="hero-actions">
+          <a href="#assessment" class="btn-primary">Book Free Assessment →</a>
+          <a href="#mentors" class="btn-ghost">Meet Our Mentors</a>
+        </div>
       </div>
-      <div class="stat-item">
-        <div class="stat-number">50+</div>
-        <div class="stat-label">IIT &amp; AIIMS Mentors</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">1:1</div>
-        <div class="stat-label">Dedicated Sessions</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">800+</div>
-        <div class="stat-label">Students Mentored</div>
+      <div class="hero-stats-card">
+        <div class="hero-stats-title">Our Track Record</div>
+        <div class="hero-stats-grid">
+          <div class="hstat"><div class="hstat-num">94%</div><div class="hstat-label">Improvement Rate</div></div>
+          <div class="hstat"><div class="hstat-num">50+</div><div class="hstat-label">IIT &amp; AIIMS Mentors</div></div>
+          <div class="hstat"><div class="hstat-num">1:1</div><div class="hstat-label">Dedicated Sessions</div></div>
+          <div class="hstat"><div class="hstat-num">800+</div><div class="hstat-label">Students Mentored</div></div>
+        </div>
+        <div class="hero-badge">
+          <div class="hero-badge-icon">🎯</div>
+          <div class="hero-badge-text">Trusted by students at Allen, Aakash, Resonance &amp; FIITJEE</div>
+        </div>
       </div>
     </div>
   </div>
-  <div class="hero-vertical">JEE Main &bull; JEE Advanced &bull; NEET UG</div>
 </section>
 
-<!-- HOW IT WORKS -->
+<div id="trust">
+  <div class="container">
+    <div class="trust-inner">
+      <div class="trust-item"><span class="trust-dot"></span>IIT &amp; AIIMS Alumni Mentors</div>
+      <div class="trust-item"><span class="trust-dot"></span>Hindi &amp; English Sessions</div>
+      <div class="trust-item"><span class="trust-dot"></span>7-Day Free Trial</div>
+      <div class="trust-item"><span class="trust-dot"></span>Online via Google Meet</div>
+      <div class="trust-item"><span class="trust-dot"></span>Available 7 Days a Week</div>
+    </div>
+  </div>
+</div>
+
 <section id="how">
   <div class="container">
     <div class="section-header reveal">
-      <div class="section-eyebrow">Process</div>
+      <div class="section-eyebrow">Our Process</div>
       <h2 class="section-title">How <em>ONO Mentor</em> works</h2>
+      <p class="section-sub">Three simple steps from enrolment to measurable rank improvement.</p>
     </div>
     <div class="steps-grid reveal">
       <div class="step">
-        <div class="step-number">01</div>
+        <div class="step-num-badge">01</div>
         <div class="step-title">Free Academic Assessment</div>
         <p class="step-desc">A 30-minute diagnostic session with an expert to identify exact gaps in your preparation — chapter-wise and concept-wise.</p>
       </div>
       <div class="step">
-        <div class="step-number">02</div>
+        <div class="step-num-badge">02</div>
         <div class="step-title">Matched with Your Mentor</div>
-        <p class="step-desc">We pair you with an IIT or AIIMS alumni mentor who scored in the same subject area you need the most support in.</p>
+        <p class="step-desc">We pair you with an IIT or AIIMS alumni mentor who scored in the same subject area where you need the most support.</p>
       </div>
       <div class="step">
-        <div class="step-number">03</div>
+        <div class="step-num-badge">03</div>
         <div class="step-title">Structured Mentorship Plan</div>
-        <p class="step-desc">Weekly 1-on-1 sessions, doubt-clearing support, mock strategy, and monthly performance reviews — all personalized to you.</p>
+        <p class="step-desc">Weekly 1-on-1 sessions, doubt-clearing, mock strategy, and monthly performance reviews — all personalised to you.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- MENTORS -->
 <section id="mentors">
   <div class="container">
     <div class="section-header reveal">
       <div class="section-eyebrow">Our Mentors</div>
       <h2 class="section-title">Learn from those who <em>cracked it</em></h2>
+      <p class="section-sub">Every ONO Mentor is an IIT or AIIMS graduate with proven mentoring experience.</p>
     </div>
     <div class="mentors-grid reveal">
       <div class="mentor-card">
         <div class="mentor-avatar">AS</div>
+        <div class="mentor-rank">AIR 47 · JEE Advanced</div>
         <div class="mentor-name">Arjun Sharma</div>
-        <div class="mentor-tag">IIT Bombay — AIR 47</div>
-        <p class="mentor-desc">B.Tech Computer Science. 3 years of JEE mentoring experience with 60+ successful students. Specialises in Maths and Physical Chemistry.</p>
-        <div class="mentor-badges">
-          <span class="badge">JEE Advanced</span>
-          <span class="badge">Mathematics</span>
-          <span class="badge">Physical Chem</span>
-        </div>
+        <div class="mentor-tag">IIT Bombay · B.Tech Computer Science</div>
+        <p class="mentor-desc">3 years of JEE mentoring with 60+ successful students. Specialises in Maths and Physical Chemistry.</p>
+        <div class="mentor-badges"><span class="badge">JEE Advanced</span><span class="badge">Mathematics</span><span class="badge">Physical Chem</span></div>
         <a href="mentor-arjun.html" class="mentor-profile-link">View Profile →</a>
       </div>
       <div class="mentor-card">
         <div class="mentor-avatar">PK</div>
+        <div class="mentor-rank">AIR 12 · NEET UG</div>
         <div class="mentor-name">Priya Kapoor</div>
-        <div class="mentor-tag">AIIMS Delhi — NEET AIR 12</div>
-        <p class="mentor-desc">MBBS final year. Mentored 80+ NEET aspirants. Renowned for making Biology intuitive and building exam temperament.</p>
-        <div class="mentor-badges">
-          <span class="badge">NEET UG</span>
-          <span class="badge">Biology</span>
-          <span class="badge">Biochemistry</span>
-        </div>
+        <div class="mentor-tag">AIIMS Delhi · MBBS Final Year</div>
+        <p class="mentor-desc">Mentored 80+ NEET aspirants. Renowned for making Biology intuitive and building exam temperament.</p>
+        <div class="mentor-badges"><span class="badge">NEET UG</span><span class="badge">Biology</span><span class="badge">Biochemistry</span></div>
         <a href="mentor-priya.html" class="mentor-profile-link">View Profile →</a>
       </div>
       <div class="mentor-card">
         <div class="mentor-avatar">RV</div>
+        <div class="mentor-rank">AIR 112 · JEE Advanced</div>
         <div class="mentor-name">Rahul Verma</div>
-        <div class="mentor-tag">IIT Delhi — AIR 112</div>
-        <p class="mentor-desc">Dual Degree in Electrical Engineering. Expert in Modern Physics and Organic Chemistry problem-solving frameworks.</p>
-        <div class="mentor-badges">
-          <span class="badge">JEE Main</span>
-          <span class="badge">Physics</span>
-          <span class="badge">Organic Chem</span>
-        </div>
+        <div class="mentor-tag">IIT Delhi · Dual Degree EE</div>
+        <p class="mentor-desc">Expert in Modern Physics and Organic Chemistry problem-solving frameworks. 75+ students mentored.</p>
+        <div class="mentor-badges"><span class="badge">JEE Main</span><span class="badge">Physics</span><span class="badge">Organic Chem</span></div>
         <a href="mentor-rahul.html" class="mentor-profile-link">View Profile →</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
 <section id="testimonials">
   <div class="container">
     <div class="section-header reveal">
       <div class="section-eyebrow">Student Results</div>
       <h2 class="section-title">Proof that <em>mentorship matters</em></h2>
+      <p class="section-sub" style="color:#64748B;">Real results from students already enrolled in coaching institutes.</p>
     </div>
     <div class="testimonials-grid reveal">
       <div class="testimonial-card">
         <span class="result-badge">JEE Advanced — AIR 340</span>
         <p class="testimonial-quote">In 4 months with Arjun Sir, my Maths percentile jumped from 62 to 94. The personalised approach is something no coaching class can replicate.</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">SK</div>
-          <div>
-            <div class="author-name">Siddharth Kumar</div>
-            <div class="author-detail">IIT Madras, 2024</div>
-          </div>
-        </div>
+        <div class="testimonial-author"><div class="author-avatar">SK</div><div><div class="author-name">Siddharth Kumar</div><div class="author-detail">IIT Madras, 2024</div></div></div>
       </div>
       <div class="testimonial-card">
         <span class="result-badge">NEET UG — AIR 189</span>
         <p class="testimonial-quote">Priya di helped me understand where I was losing marks. Within 10 sessions, my Biology score went from 280 to 340. Life-changing mentorship.</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">AM</div>
-          <div>
-            <div class="author-name">Ananya Mishra</div>
-            <div class="author-detail">AIIMS Patna, 2024</div>
-          </div>
-        </div>
+        <div class="testimonial-author"><div class="author-avatar">AM</div><div><div class="author-name">Ananya Mishra</div><div class="author-detail">AIIMS Patna, 2024</div></div></div>
       </div>
     </div>
-    <div class="testimonial-card reveal" style="margin-top:1.5px; background: var(--dark-2); border: none; border-top: 0.5px solid var(--border);">
+    <div class="testimonial-wide reveal">
+      <span class="result-badge">JEE Main — 99.4 Percentile</span>
       <p class="testimonial-quote">I was already in a top coaching institute but was stuck at 95 percentile. ONO Mentor's 1-on-1 approach pushed me to 99.4 in just 3 months. Worth every rupee.</p>
-      <div class="testimonial-author">
-        <div class="author-avatar">RJ</div>
-        <div>
-          <div class="author-name">Rohan Joshi</div>
-          <div class="author-detail">JEE Main — 99.4 Percentile · IIT Roorkee, 2024</div>
-        </div>
-      </div>
+      <div class="testimonial-author"><div class="author-avatar">RJ</div><div><div class="author-name">Rohan Joshi</div><div class="author-detail">IIT Roorkee, 2024</div></div></div>
     </div>
   </div>
 </section>
 
-<!-- ASSESSMENT BOOKING -->
 <section id="assessment">
   <div class="container">
     <div class="assessment-wrapper">
       <div class="assessment-left reveal">
-        <div class="section-eyebrow" style="justify-content: flex-start;">Assessment</div>
-        <h2>Book your <em>free</em><br />academic assessment</h2>
+        <div class="section-eyebrow">Free Assessment</div>
+        <h2>Book your <em>free</em> academic assessment</h2>
         <p>A 30-minute 1-on-1 session with an ONO Mentor expert to assess your preparation level, identify weak areas, and chart a personalised improvement path — at zero cost.</p>
         <ul class="feature-list">
           <li>Personalised chapter-wise gap analysis</li>
@@ -956,68 +348,35 @@
           <li>Custom 30-day improvement roadmap</li>
           <li>No obligation to enrol</li>
         </ul>
-        <div class="gold-divider" style="margin-top:2rem;"><span>Limited slots per week</span></div>
-        <p style="font-size:0.8rem; color: var(--text-dim); margin-top:0.75rem;">Sessions available 7 days a week &bull; Online via Google Meet &bull; Available in Hindi &amp; English</p>
+        <div class="slots-notice"><span class="slots-dot"></span>Limited slots available this week · Sessions in Hindi &amp; English</div>
       </div>
-      <div class="assessment-right reveal">
-        <div class="form-card" id="form-card">
+      <div class="reveal">
+        <div class="form-card">
           <div id="form-content">
             <div class="form-title">Reserve Your Slot</div>
             <div class="form-sub">Fill in details — we'll confirm within 2 hours</div>
             <div class="form-row">
-              <div class="form-group">
-                <label>First Name</label>
-                <input type="text" id="fname" placeholder="Rahul" />
-              </div>
-              <div class="form-group">
-                <label>Last Name</label>
-                <input type="text" id="lname" placeholder="Sharma" />
-              </div>
+              <div class="form-group"><label>First Name</label><input type="text" id="fname" placeholder="Rahul" /></div>
+              <div class="form-group"><label>Last Name</label><input type="text" id="lname" placeholder="Sharma" /></div>
             </div>
-            <div class="form-group">
-              <label>Phone Number</label>
-              <input type="tel" id="phone" placeholder="+91 98765 43210" />
-            </div>
-            <div class="form-group">
-              <label>Email Address</label>
-              <input type="email" id="email" placeholder="rahul@gmail.com" />
-            </div>
+            <div class="form-group"><label>Phone Number</label><input type="tel" id="phone" placeholder="+91 98765 43210" /></div>
+            <div class="form-group"><label>Email Address</label><input type="email" id="email" placeholder="rahul@gmail.com" /></div>
             <div class="form-row">
-              <div class="form-group">
-                <label>Target Exam</label>
-                <select id="exam">
-                  <option value="">Select exam</option>
-                  <option>JEE Main</option>
-                  <option>JEE Advanced</option>
-                  <option>NEET UG</option>
-                  <option>Both JEE &amp; NEET</option>
-                </select>
+              <div class="form-group"><label>Target Exam</label>
+                <select id="exam"><option value="">Select exam</option><option>JEE Main</option><option>JEE Advanced</option><option>NEET UG</option><option>Both JEE &amp; NEET</option></select>
               </div>
-              <div class="form-group">
-                <label>Current Class</label>
-                <select id="cls">
-                  <option value="">Select class</option>
-                  <option>Class 11</option>
-                  <option>Class 12</option>
-                  <option>Dropper (2025)</option>
-                  <option>Dropper (2026)</option>
-                </select>
+              <div class="form-group"><label>Current Class</label>
+                <select id="cls"><option value="">Select class</option><option>Class 11</option><option>Class 12</option><option>Dropper (2025)</option><option>Dropper (2026)</option></select>
               </div>
             </div>
-            <div class="form-group">
-              <label>Current Coaching Institute</label>
-              <input type="text" id="coaching" placeholder="Allen, Aakash, Resonance, FIITJEE…" />
-            </div>
-            <div class="form-group">
-              <label>Biggest Challenge (optional)</label>
-              <textarea id="challenge" placeholder="e.g. Struggling with Organic Chemistry and exam anxiety..."></textarea>
-            </div>
+            <div class="form-group"><label>Current Coaching Institute</label><input type="text" id="coaching" placeholder="Allen, Aakash, Resonance, FIITJEE…" /></div>
+            <div class="form-group"><label>Biggest Challenge (optional)</label><textarea id="challenge" placeholder="e.g. Struggling with Organic Chemistry and exam anxiety..."></textarea></div>
             <button class="form-submit" onclick="handleSubmit()">Book My Free Assessment →</button>
-            <p class="form-note">Your details are safe with us. We never share your information.</p>
+            <p class="form-note">🔒 Your details are safe. We never share your information.</p>
           </div>
           <div class="form-success" id="form-success">
-            <div class="success-icon">✦</div>
-            <div class="success-title">You're on the list.</div>
+            <div class="success-icon">✅</div>
+            <div class="success-title">You're confirmed!</div>
             <p class="success-sub" style="margin-top:0.5rem;">Our academic counsellor will reach out within 2 hours to confirm your assessment slot.<br /><br />Check your WhatsApp &amp; email.</p>
           </div>
         </div>
@@ -1026,28 +385,21 @@
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
-  <div class="container" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1.5rem; width:100%;">
-    <div class="footer-logo">ONO<span> Mentor</span></div>
-    <div class="footer-copy">© 2025 ONO Mentor. All rights reserved.</div>
-    <ul class="footer-links">
-      <li><a href="#">Privacy</a></li>
-      <li><a href="#">Terms</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">ONO<span>Mentor</span></div>
+      <div class="footer-copy">© 2025 ONO Mentor. All rights reserved.</div>
+      <ul class="footer-links"><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li><li><a href="#">Contact</a></li></ul>
+    </div>
   </div>
 </footer>
 
-<!-- WHATSAPP FLOAT -->
 <a class="whatsapp-float" href="https://wa.me/919012482774?text=Hi%20ONO%20Mentor%2C%20I%20want%20to%20book%20a%20free%20assessment." target="_blank" title="Chat on WhatsApp">
-  <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-    <path d="M16 0C7.164 0 0 7.164 0 16c0 2.82.734 5.47 2.018 7.773L0 32l8.463-2.018A15.93 15.93 0 0016 32c8.836 0 16-7.164 16-16S24.836 0 16 0zm0 29.091a13.023 13.023 0 01-6.64-1.818l-.476-.284-4.96 1.183 1.2-4.84-.31-.497A13.07 13.07 0 012.91 16C2.91 9.33 8.33 3.91 16 3.91c7.67 0 13.09 5.42 13.09 12.09S23.67 29.09 16 29.09zm7.2-9.6c-.39-.196-2.31-1.14-2.67-1.27-.36-.13-.62-.196-.88.196-.26.39-1 1.27-1.23 1.53-.23.26-.45.3-.84.1-.39-.196-1.65-.61-3.14-1.94-1.16-1.03-1.94-2.31-2.17-2.7-.23-.39-.025-.6.17-.8.18-.18.39-.45.585-.675.196-.226.26-.39.39-.65.13-.26.065-.487-.032-.683-.098-.196-.88-2.12-1.206-2.9-.317-.764-.638-.66-.88-.67-.227-.01-.487-.012-.747-.012s-.683.098-.98.487c-.3.39-1.14 1.11-1.14 2.7s1.17 3.14 1.33 3.36c.17.22 2.3 3.51 5.57 4.92.778.337 1.386.538 1.86.69.78.25 1.49.214 2.05.13.625-.093 2.31-.944 2.636-1.856.326-.912.326-1.694.228-1.856-.098-.162-.358-.26-.748-.456z"/>
-  </svg>
+  <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16 0C7.164 0 0 7.164 0 16c0 2.82.734 5.47 2.018 7.773L0 32l8.463-2.018A15.93 15.93 0 0016 32c8.836 0 16-7.164 16-16S24.836 0 16 0zm0 29.091a13.023 13.023 0 01-6.64-1.818l-.476-.284-4.96 1.183 1.2-4.84-.31-.497A13.07 13.07 0 012.91 16C2.91 9.33 8.33 3.91 16 3.91c7.67 0 13.09 5.42 13.09 12.09S23.67 29.09 16 29.09zm7.2-9.6c-.39-.196-2.31-1.14-2.67-1.27-.36-.13-.62-.196-.88.196-.26.39-1 1.27-1.23 1.53-.23.26-.45.3-.84.1-.39-.196-1.65-.61-3.14-1.94-1.16-1.03-1.94-2.31-2.17-2.7-.23-.39-.025-.6.17-.8.18-.18.39-.45.585-.675.196-.226.26-.39.39-.65.13-.26.065-.487-.032-.683-.098-.196-.88-2.12-1.206-2.9-.317-.764-.638-.66-.88-.67-.227-.01-.487-.012-.747-.012s-.683.098-.98.487c-.3.39-1.14 1.11-1.14 2.7s1.17 3.14 1.33 3.36c.17.22 2.3 3.51 5.57 4.92.778.337 1.386.538 1.86.69.78.25 1.49.214 2.05.13.625-.093 2.31-.944 2.636-1.856.326-.912.326-1.694.228-1.856-.098-.162-.358-.26-.748-.456z"/></svg>
 </a>
 
 <script>
-  // Scroll reveal
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
@@ -1059,51 +411,31 @@
   }, { threshold: 0.1 });
   reveals.forEach(el => observer.observe(el));
 
-  // ── Google Apps Script Web App URL ──────────────────────────────────────
-  // Replace with your deployed Apps Script URL after following setup guide.
   const SHEET_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
-  // ────────────────────────────────────────────────────────────────────────
 
   async function handleSubmit() {
-    const fname     = document.getElementById('fname').value.trim();
-    const lname     = document.getElementById('lname').value.trim();
-    const phone     = document.getElementById('phone').value.trim();
-    const email     = document.getElementById('email').value.trim();
-    const exam      = document.getElementById('exam').value;
-    const cls       = document.getElementById('cls').value;
+    const fname = document.getElementById('fname').value.trim();
+    const lname = document.getElementById('lname').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const exam  = document.getElementById('exam').value;
+    const cls   = document.getElementById('cls').value;
     const coaching  = document.getElementById('coaching').value.trim();
     const challenge = document.getElementById('challenge').value.trim();
-
-    if (!fname || !phone || !exam) {
-      alert('Please fill in your name, phone number, and target exam.');
-      return;
-    }
-
+    if (!fname || !phone || !exam) { alert('Please fill in your name, phone number, and target exam.'); return; }
     const btn = document.querySelector('.form-submit');
-    btn.textContent = 'Submitting\u2026';
-    btn.disabled = true;
-
-    const payload = { fname, lname, phone, email, exam, cls, coaching, challenge,
-      timestamp: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }) };
-
+    btn.textContent = 'Submitting…'; btn.disabled = true;
+    const payload = { fname, lname, phone, email, exam, cls, coaching, challenge, timestamp: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }) };
     try {
       if (SHEET_URL !== 'YOUR_APPS_SCRIPT_URL_HERE') {
-        await fetch(SHEET_URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
+        await fetch(SHEET_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
       }
-    } catch(e) { /* silent fail — always show success to user */ }
-
+    } catch(e) {}
     btn.disabled = false;
     document.getElementById('form-content').style.display = 'none';
     const succ = document.getElementById('form-success');
-    succ.style.display = 'block';
-    succ.classList.add('active');
+    succ.style.display = 'block'; succ.classList.add('active');
   }
 </script>
-
 </body>
 </html>
