@@ -1,0 +1,9 @@
+{
+  "cleanUrls": true,
+  "routes": [
+    { "src": "/", "dest": "/index.html" },
+    { "src": "/mentor-arjun", "dest": "/mentor-arjun.html" },
+    { "src": "/mentor-priya", "dest": "/mentor-priya.html" },
+    { "src": "/mentor-rahul", "dest": "/mentor-rahul.html" }
+  ]
+}
